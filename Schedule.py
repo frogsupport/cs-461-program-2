@@ -13,3 +13,8 @@ class Schedule:
         self.SLA394=Activity()
         self.SLA449=Activity()
         self.SLA451=Activity()
+        self.fitnessScore=0.0
+
+# Returns a random schedule
+def randomSchedule():
+    return Schedule()
