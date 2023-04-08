@@ -1,17 +1,17 @@
 from Activity import Activity
 from Schedule import Schedule, randomSchedule
 
-# TODO: Generate 500 random schedules
-# Each random schedule will consist of random activities, so need a way of making random activities
+# Generate 500 random schedules
 genesisPopulation = list()
-genesisPopulation.append(randomSchedule())
-# for i in range(0, 501):
-#     genesisPopulation.append(randomSchedule())
-
-# for schedule in genesisPopulation:
-#     print(schedule.SLA100A.fitnessScore)
+for i in range(0, 501):
+    genesisPopulation.append(randomSchedule())
 
 # TODO: fitness function: calculate the fitness of a schedule
+for schedule in genesisPopulation:
+    schedule.calculateFitness()
+    print("Fitness: " + str(schedule.fitnessScore))
+
+# print("Fitness: " + str(genesisPopulation[0].fitnessScore))
 
 # TODO: Calculate the average fitness of the population
 

@@ -50,11 +50,58 @@ FACILITATORS = ["Lock", "Glen", "Banks",
 
 class Schedule:
     def __init__(self):
-        self.Activities=list()
+        self.activities=list()
         self.fitnessScore=0.0
 
+    def calculateFitness(self):
+        # Calculate individual activity level fitness
+        for activity in self.activities:
+            activity.calculateFitness()
+            self.fitnessScore += activity.fitnessScore
+
+        # Activity is scheduled at same time in same room as another activity
+        for activity in self.activities:
+            activityRoom = activity.room
+            activityTimeSlot = activity.timeSlot
+            otherActivities = self.activities
+            otherActivities.remove(activity)
+            for otherActivity in otherActivities:
+                otherRoom = otherActivity.room
+                otherTimeSlot = otherActivity.timeSlot
+                if (activityTimeSlot == otherTimeSlot) & (activityRoom == otherRoom):
+                    self.fitnessScore -= 0.25
+
+        # Check if facilitator is scheduled for more than one activity in a time slot
+        for timeSlot in TIME_SLOTS:
+            activeFacilitators = list()
+
+            # Get the facilitators for the current time slot
+            for activity in self.activities:
+                if timeSlot == activity.timeSlot:
+                    activeFacilitators.append(activity.facilitator)
+
+            # Check for each facilitator how many times they are scheduled in this time slot
+            for facilitator in FACILITATORS:
+                numScheduledActivities = activeFacilitators.count(facilitator)
+                if numScheduledActivities == 1:
+                    self.fitnessScore += 0.2
+                elif numScheduledActivities > 1:
+                    self.fitnessScore -= 0.5
+                
+        # Check if facilitator is scheduled for more than 4 activities total
+        
+
+        # 2 sections of SLA101 and SLA 191 criteria
+
     def addActivity(self, activity):
-        self.Activities.append(activity)
+        self.activities.append(activity)
+
+    def printSchedule(self):
+        print("Schedule:")
+        print("-------------------------")
+        for activity in self.activities:
+            print(activity.printActivity())
+            print()
 
 # Returns a random schedule
 def randomSchedule():
@@ -69,10 +116,5 @@ def randomSchedule():
                      COURSES[course][2], 
                      COURSES[course][0], 
                      course))
-        
-    for activity in newRandomSchedule.Activities:
-        print(activity.printActivity())
-        print()
-        print()
 
     return newRandomSchedule
