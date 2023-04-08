@@ -1,14 +1,15 @@
+from Room import Room
+
 class Activity:
     def __init__(
             self,
             timeSlot=int(),
-            room=str(),
+            room=Room(),
             facilitator=str(),
             preferredFacilitators=list(),
             otherFacilitators=list(),
             expectedEnrollment=int(),
-            courseNumber=str(),
-            section=str()):
+            courseNumber=str()):
         self.timeSlot=timeSlot
         self.room=room
         self.facilitator=facilitator
@@ -16,9 +17,17 @@ class Activity:
         self.otherFacilitators=otherFacilitators
         self.expectedEnrollment=expectedEnrollment
         self.courseNumber=courseNumber
-        self.section=section
         self.fitnessScore=0.0
 
-# Returns a randomely created activity
-def randomActivity():
-    return Activity()
+    def printActivity(self):
+        print("Course: " + self.courseNumber)
+        print("Time Slot: " + str(self.timeSlot))
+        self.room.printRoom()
+        print("Facilitator: " + self.facilitator)
+        print("Preferred Facilitators: ")
+        for facilitator in self.preferredFacilitators:
+            print(facilitator)
+        print("Other Facilitators: ")
+        for facilitator in self.otherFacilitators:
+            print(facilitator)
+        print("Expected Enrollment: " + str(self.expectedEnrollment))
