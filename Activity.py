@@ -19,6 +19,7 @@ class Activity:
         self.courseNumber=courseNumber
         self.fitnessScore=0.0
 
+    # Calculate the fitness of an individual activity
     def calculateFitness(self):
         # Room size
         if self.room.capacity < self.expectedEnrollment:
@@ -39,20 +40,25 @@ class Activity:
             self.fitnessScore -= 0.1
 
     def printActivity(self):
+        print("Activity")
+        print("------")
         print("Course: " + self.courseNumber)
         print("Time Slot: " + str(self.timeSlot))
 
         self.room.printRoom()
 
         print("Facilitator: " + self.facilitator)
-        print("Preferred Facilitators: ")
+        print("Preferred Facilitators: ", end="")
 
         for facilitator in self.preferredFacilitators:
-            print(facilitator)
+            print(facilitator, end=", ")
 
-        print("Other Facilitators: ")
+        print()
+        print("Other Facilitators: ", end="")
 
         for facilitator in self.otherFacilitators:
-            print(facilitator)
+            print(facilitator, end=", ")
 
+        print()
         print("Expected Enrollment: " + str(self.expectedEnrollment))
+        print()

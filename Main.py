@@ -6,16 +6,15 @@ genesisPopulation = list()
 for i in range(0, 501):
     genesisPopulation.append(randomSchedule())
 
-# TODO: fitness function: calculate the fitness of a schedule
+# Calculate the fitness of each schedule
 for schedule in genesisPopulation:
     schedule.calculateFitness()
-    print("Fitness: " + str(schedule.fitnessScore))
 
 # print("Fitness: " + str(genesisPopulation[0].fitnessScore))
 
 # TODO: Calculate the average fitness of the population
 
-# TODO: naturalSelection Function: creates the mating pools. Maybe top 10%, next 20%, next 40%
+# TODO: naturalSelection Function: creates the mating pools. Maybe top 10%, next 20%, next 20%, remove bottom half
 
 # TODO: reproduce function: input is two parents. returns two children
 

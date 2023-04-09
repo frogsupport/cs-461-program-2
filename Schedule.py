@@ -53,6 +53,7 @@ class Schedule:
         self.activities=list()
         self.fitnessScore=0.0
 
+    # Calculate the fitness of a schedule
     def calculateFitness(self):
         # Calculate individual activity level fitness
         for activity in self.activities:
@@ -63,11 +64,14 @@ class Schedule:
         for activity in self.activities:
             activityRoom = activity.room
             activityTimeSlot = activity.timeSlot
-            otherActivities = self.activities
+
+            otherActivities = self.activities.copy()
             otherActivities.remove(activity)
+
             for otherActivity in otherActivities:
                 otherRoom = otherActivity.room
                 otherTimeSlot = otherActivity.timeSlot
+
                 if (activityTimeSlot == otherTimeSlot) & (activityRoom == otherRoom):
                     self.fitnessScore -= 0.25
 
@@ -89,18 +93,102 @@ class Schedule:
                     self.fitnessScore -= 0.5
                 
         # Check if facilitator is scheduled for more than 4 activities total
-        
+        facilitatorsList = list()
+        for activity in self.activities:
+            facilitatorsList.append(activity.facilitator)
+
+        for facilitator in FACILITATORS:
+            facilitatorCount = facilitatorsList.count(facilitator)
+            
+            if facilitatorCount > 4:
+                self.fitnessScore -= 0.5
+            elif (facilitatorCount == 1) | (facilitatorCount == 2) & (facilitator != "Tyler"):
+                self.fitnessScore -= 0.4
 
         # 2 sections of SLA101 and SLA 191 criteria
+        # Get the time slots and buildings for the desired activities
+        for activity in self.activities:
+            if activity.courseNumber == "SLA100A":
+                sla101aTimeSlot = activity.timeSlot
+                sla101aBuilding = activity.room.building
+
+            if activity.courseNumber == "SLA100B":
+                sla101bTimeSlot = activity.timeSlot
+                sla101bBuilding = activity.room.building
+
+            if activity.courseNumber == "SLA191A":
+                sla191aTimeSlot = activity.timeSlot
+                sla191aBuilding = activity.room.building
+
+            if activity.courseNumber == "SLA191B":
+                sla191bTimeSlot = activity.timeSlot
+                sla191bBuilding = activity.room.building
+        
+        # Time slots are >= 4 hours apart for SLA101 and SLA191
+        if abs(sla101aTimeSlot - sla101bTimeSlot) >= 4:
+            self.fitnessScore += 0.5
+        if abs(sla191aTimeSlot - sla191bTimeSlot) >= 4:
+            self.fitnessScore += 0.5
+
+        # Time slots are same hour for SLA101 or SLA191
+        if sla101aTimeSlot == sla101bTimeSlot:
+            self.fitnessScore -= 0.5
+        if sla191aTimeSlot == sla191bTimeSlot:
+            self.fitnessScore -= 0.5
+
+        # Time slots are same hour for SLA101 and SLA191
+        if sla101aTimeSlot == sla191aTimeSlot:
+            self.fitnessScore -= 0.25
+        if sla101bTimeSlot == sla191aTimeSlot:
+            self.fitnessScore -= 0.25
+        if sla101aTimeSlot == sla191bTimeSlot:
+            self.fitnessScore -= 0.25
+        if sla101bTimeSlot == sla191bTimeSlot:
+            self.fitnessScore -= 0.25
+
+        # Sections of 101 and 191 are in consecutive time slots and if so are they in Roman or Beach together
+        if (sla101aTimeSlot == (sla191aTimeSlot - 1)) | (sla101aTimeSlot == (sla191aTimeSlot + 1)):
+            self.fitnessScore += 0.5
+            if ((sla101aBuilding == "Roman") & (sla191aBuilding != "Roman")) | ((sla101aBuilding == "Beach") & (sla191aBuilding != "Beach")):
+                self.fitnessScore -= 0.4
+
+        if (sla101bTimeSlot == (sla191aTimeSlot - 1)) | (sla101bTimeSlot == (sla191aTimeSlot + 1)):
+            self.fitnessScore += 0.5
+            if (sla101bBuilding == "Roman") & (sla191aBuilding != "Roman") | ((sla101bBuilding == "Beach") & (sla191aBuilding != "Beach")):
+                self.fitnessScore -= 0.4
+
+        if (sla101aTimeSlot == (sla191bTimeSlot - 1)) | (sla101aTimeSlot == (sla191bTimeSlot + 1)):
+            self.fitnessScore += 0.5
+            if (sla101aBuilding == "Roman") & (sla191bBuilding != "Roman") | ((sla101aBuilding == "Beach") & (sla191bBuilding != "Beach")):
+                self.fitnessScore -= 0.4
+
+        if (sla101bTimeSlot == (sla191bTimeSlot - 1)) | (sla101bTimeSlot == (sla191bTimeSlot + 1)):
+            self.fitnessScore += 0.5
+            if (sla101bBuilding == "Roman") & (sla191bBuilding != "Roman") | ((sla101bBuilding == "Beach") & (sla191bBuilding != "Beach")):
+                self.fitnessScore -= 0.4
+
+        # Sections of SLA101 and SLA 191 have one hour in between them
+        if (sla101aTimeSlot == (sla191aTimeSlot - 2)) | (sla101aTimeSlot == (sla191aTimeSlot + 2)):
+            self.fitnessScore += 0.25
+
+        if (sla101bTimeSlot == (sla191aTimeSlot - 2)) | (sla101bTimeSlot == (sla191aTimeSlot + 2)):
+            self.fitnessScore += 0.25
+
+        if (sla101aTimeSlot == (sla191bTimeSlot - 2)) | (sla101aTimeSlot == (sla191bTimeSlot + 2)):
+            self.fitnessScore += 0.25
+
+        if (sla101bTimeSlot == (sla191bTimeSlot - 2)) | (sla101bTimeSlot == (sla191bTimeSlot + 2)):
+            self.fitnessScore += 0.25
+
 
     def addActivity(self, activity):
         self.activities.append(activity)
 
     def printSchedule(self):
         print("Schedule:")
-        print("-------------------------")
+        print("---------------------------------------------------")
         for activity in self.activities:
-            print(activity.printActivity())
+            activity.printActivity()
             print()
 
 # Returns a random schedule
