@@ -1,5 +1,7 @@
 from Room import Room
 
+# An activity consists of all the properties of an activity,
+#  such as time slot and facilitator.
 class Activity:
     def __init__(
             self,
@@ -39,6 +41,7 @@ class Activity:
         else:
             self.fitnessScore -= 0.1
 
+    # Prints an individual activity
     def printActivity(self):
         print("Activity")
         print("------")

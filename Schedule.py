@@ -48,6 +48,7 @@ FACILITATORS = ["Lock", "Glen", "Banks",
                 "Uther", "Tyler", "Numen", 
                 "Zeldin"]
 
+# A schedule consists of a list of activities
 class Schedule:
     def __init__(self):
         self.activities=list()
@@ -180,16 +181,23 @@ class Schedule:
         if (sla101bTimeSlot == (sla191bTimeSlot - 2)) | (sla101bTimeSlot == (sla191bTimeSlot + 2)):
             self.fitnessScore += 0.25
 
-
+    # Adds an activity to a schedule
     def addActivity(self, activity):
         self.activities.append(activity)
 
+    # Print the schedule
     def printSchedule(self):
         print("Schedule:")
         print("---------------------------------------------------")
+        print("Fitness score: " + str(self.fitnessScore))
+        print()
         for activity in self.activities:
             activity.printActivity()
             print()
+        
+    # Sets the fitness score for a schedule
+    def setFitnessScore(self, newFitnessScore):
+        self.fitnessScore = newFitnessScore
 
 # Returns a random schedule
 def randomSchedule():
