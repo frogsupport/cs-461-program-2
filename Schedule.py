@@ -1,5 +1,5 @@
 import random
-from Activity import Activity
+from Activity import FACILITATORS, TIME_SLOTS, Activity
 from Room import Room, getRandomRoom
 
 SLA100_PREFERRED_FACILITATORS = ["Glen", "Lock", "Banks", "Zeldin"]
@@ -41,12 +41,12 @@ COURSES = {"SLA100A": [50, SLA100_PREFERRED_FACILITATORS, SLA100_OTHER_FACILITAT
            "SLA449": [60, SLA449_PREFERRED_FACILITATORS, SLA449_OTHER_FACILITATORS], 
            "SLA451": [100, SLA451_PREFERRED_FACILITATORS, SLA451_OTHER_FACILITATORS]}
 
-TIME_SLOTS = [10, 11, 12, 13, 14, 15]
+# TIME_SLOTS = [10, 11, 12, 13, 14, 15]
 
-FACILITATORS = ["Lock", "Glen", "Banks", 
-                "Richards", "Shaw", "Singer", 
-                "Uther", "Tyler", "Numen", 
-                "Zeldin"]
+# FACILITATORS = ["Lock", "Glen", "Banks", 
+#                 "Richards", "Shaw", "Singer", 
+#                 "Uther", "Tyler", "Numen", 
+#                 "Zeldin"]
 
 # A schedule consists of a list of activities
 class Schedule:
@@ -56,6 +56,9 @@ class Schedule:
 
     # Calculate the fitness of a schedule
     def calculateFitness(self):
+        # Make sure the fitness score starts out as 0
+        self.fitnessScore = 0.0
+
         # Calculate individual activity level fitness
         for activity in self.activities:
             activity.calculateFitness()
@@ -198,6 +201,29 @@ class Schedule:
     # Sets the fitness score for a schedule
     def setFitnessScore(self, newFitnessScore):
         self.fitnessScore = newFitnessScore
+
+    # Resets the fitness scores of the activities and the schedules to 0
+    def resetFitnessScore(self):
+        for activity in self.activities:
+            activity.resetFitnessScore()
+
+        self.fitnessScore = 0.0
+
+    # Crosses this schedule with another
+    def crossover(self, otherSchedule):
+        child=Schedule()
+
+        for i in range(0, 11, 2):
+            child.addActivity(self.activities[i])
+
+        for i in range(1, 11, 2):
+            child.addActivity(otherSchedule.activities[i])
+
+        return child
+
+    # Mutate a random activity of the schedule
+    def mutate(self):
+        self.activities[random.randint(0, 10)].mutate
 
 # Returns a random schedule
 def randomSchedule():

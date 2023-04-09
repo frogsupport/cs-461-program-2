@@ -1,4 +1,12 @@
-from Room import Room
+import random
+from Room import Room, getRandomRoom
+
+TIME_SLOTS = [10, 11, 12, 13, 14, 15]
+
+FACILITATORS = ["Lock", "Glen", "Banks", 
+                "Richards", "Shaw", "Singer", 
+                "Uther", "Tyler", "Numen", 
+                "Zeldin"]
 
 # An activity consists of all the properties of an activity,
 #  such as time slot and facilitator.
@@ -23,6 +31,9 @@ class Activity:
 
     # Calculate the fitness of an individual activity
     def calculateFitness(self):
+        # Make sure fitness score starts at 0
+        self.fitnessScore = 0.0
+
         # Room size
         if self.room.capacity < self.expectedEnrollment:
             self.fitnessScore -= 0.5
@@ -40,6 +51,17 @@ class Activity:
             self.fitnessScore =+ 0.2
         else:
             self.fitnessScore -= 0.1
+
+    # Mutate a random attribute of the activity
+    def mutate(self):
+        thingToMutate = random.randint(0, 2)
+
+        if thingToMutate == 0:
+            self.timeSlot = random.choice(TIME_SLOTS)
+        elif thingToMutate == 1:
+            self.room = getRandomRoom()
+        elif thingToMutate == 2:
+            self.facilitator = random.choice(FACILITATORS)
 
     # Prints an individual activity
     def printActivity(self):
@@ -65,3 +87,6 @@ class Activity:
         print()
         print("Expected Enrollment: " + str(self.expectedEnrollment))
         print()
+
+    def resetFitnessScore(self):
+        self.fitnessScore = 0.0
