@@ -1,0 +1,136 @@
+Schedule:
+---------------------------------------------------
+Fitness score: 0.0009025270758122744
+
+Activity
+------
+Course: SLA100A
+Time Slot: 13
+Building: Frank
+Room Number: 119
+Capacity: 60
+Facilitator: Richards
+Preferred Facilitators: Glen, Lock, Banks, Zeldin, 
+Other Facilitators: Numen, Richards, 
+Expected Enrollment: 50, 
+
+Activity
+------
+Course: SLA100B
+Time Slot: 15
+Building: Beach
+Room Number: 301
+Capacity: 75
+Facilitator: Uther
+Preferred Facilitators: Glen, Lock, Banks, Zeldin, 
+Other Facilitators: Numen, Richards, 
+Expected Enrollment: 50, 
+
+Activity
+------
+Course: SLA191A
+Time Slot: 10
+Building: Loft
+Room Number: 206
+Capacity: 75
+Facilitator: Glen
+Preferred Facilitators: Glen, Lock, Banks, Zeldin, 
+Other Facilitators: Numen, Richards, 
+Expected Enrollment: 50, 
+
+Activity
+------
+Course: SLA191B
+Time Slot: 14
+Building: Beach
+Room Number: 301
+Capacity: 75
+Facilitator: Banks
+Preferred Facilitators: Glen, Lock, Banks, Zeldin, 
+Other Facilitators: Numen, Richards, 
+Expected Enrollment: 50, 
+
+Activity
+------
+Course: SLA201
+Time Slot: 15
+Building: Loft
+Room Number: 206
+Capacity: 75
+Facilitator: Glen
+Preferred Facilitators: Glen, Banks, Zeldin, Shaw, 
+Other Facilitators: Numen, Richards, Singer, 
+Expected Enrollment: 50, 
+
+Activity
+------
+Course: SLA291
+Time Slot: 12
+Building: Loft
+Room Number: 310
+Capacity: 108
+Facilitator: Zeldin
+Preferred Facilitators: Lock, Banks, Zeldin, Singer, 
+Other Facilitators: Numen, Richards, Shaw, Tyler, 
+Expected Enrollment: 50, 
+
+Activity
+------
+Course: SLA303
+Time Slot: 12
+Building: Beach
+Room Number: 301
+Capacity: 75
+Facilitator: Banks
+Preferred Facilitators: Glen, Banks, Zeldin, 
+Other Facilitators: Numen, Shaw, Singer, 
+Expected Enrollment: 60, 
+
+Activity
+------
+Course: SLA304
+Time Slot: 10
+Building: Logos
+Room Number: 325
+Capacity: 450
+Facilitator: Banks
+Preferred Facilitators: Glen, Banks, Tyler, 
+Other Facilitators: Numen, Shaw, Singer, Richards, Uther, Zeldin, 
+Expected Enrollment: 25, 
+
+Activity
+------
+Course: SLA394
+Time Slot: 12
+Building: Roman
+Room Number: 216
+Capacity: 30
+Facilitator: Tyler
+Preferred Facilitators: Tyler, Singer, 
+Other Facilitators: Richards, Zeldin, 
+Expected Enrollment: 20, 
+
+Activity
+------
+Course: SLA449
+Time Slot: 13
+Building: Loft
+Room Number: 206
+Capacity: 75
+Facilitator: Tyler
+Preferred Facilitators: Tyler, Singer, Shaw, 
+Other Facilitators: Uther, Zeldin, 
+Expected Enrollment: 60, 
+
+Activity
+------
+Course: SLA451
+Time Slot: 15
+Building: Beach
+Room Number: 201
+Capacity: 60
+Facilitator: Banks
+Preferred Facilitators: Tyler, Singer, Shaw, 
+Other Facilitators: Uther, Zeldin, Richards, Banks, 
+Expected Enrollment: 100, 
+

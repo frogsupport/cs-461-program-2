@@ -197,6 +197,18 @@ class Schedule:
         for activity in self.activities:
             activity.printActivity()
             print()
+
+    def writeSchedule(self):
+        schedule=str()
+        schedule += "Schedule:\n"
+        schedule += "---------------------------------------------------\n"
+        schedule += "Fitness score: " + str(self.fitnessScore) + "\n"
+        schedule += "\n"
+        for activity in self.activities:
+            schedule += activity.writeActivity()
+            schedule += "\n"
+
+        return schedule
         
     # Sets the fitness score for a schedule
     def setFitnessScore(self, newFitnessScore):
@@ -213,11 +225,17 @@ class Schedule:
     def crossover(self, otherSchedule):
         child=Schedule()
 
-        for i in range(0, 11, 2):
-            child.addActivity(self.activities[i])
+        for i in range(0, 11):
+            if ((i % 2) == 0):
+                child.addActivity(self.activities[i])
+            else:
+                child.addActivity(otherSchedule.activities[i])
 
-        for i in range(1, 11, 2):
-            child.addActivity(otherSchedule.activities[i])
+        # for i in range(0, 11, 2):
+        #     child.addActivity(self.activities[i])
+
+        # for i in range(1, 11, 2):
+        #     child.addActivity(otherSchedule.activities[i])
 
         return child
 

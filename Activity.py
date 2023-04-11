@@ -88,5 +88,31 @@ class Activity:
         print("Expected Enrollment: " + str(self.expectedEnrollment))
         print()
 
+    def writeActivity(self):
+        activity = str()
+
+        activity += "Activity\n"
+        activity += "------\n"
+        activity += "Course: " + self.courseNumber + "\n"
+        activity += "Time Slot: " + str(self.timeSlot) + "\n"
+
+        activity += self.room.writeRoom()
+
+        activity += "Facilitator: " + self.facilitator + "\n"
+        activity += "Preferred Facilitators: "
+        for facilitator in self.preferredFacilitators:
+            activity += facilitator + ", "
+
+        activity += "\n"
+        activity += "Other Facilitators: "
+        for facilitator in self.otherFacilitators:
+            activity += facilitator + ", "
+
+        activity += "\n"
+        activity += "Expected Enrollment: " + str(self.expectedEnrollment) + ", "
+        activity += "\n"
+
+        return activity
+
     def resetFitnessScore(self):
         self.fitnessScore = 0.0

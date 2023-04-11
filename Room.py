@@ -13,6 +13,15 @@ class Room:
         print("Room Number: " + self.roomNumber)
         print("Capacity: " + str(self.capacity))
 
+    def writeRoom(self):
+        room = str()
+
+        room += "Building: " + self.building + "\n"
+        room += "Room Number: " + self.roomNumber + "\n"
+        room += "Capacity: " + str(self.capacity) + "\n"
+
+        return room
+
 # The valid rooms for an activity
 rooms = [Room("Slater", "003", 45), Room("Roman", "216", 30), Room("Loft", "206", 75),
         Room("Roman", "201", 50), Room("Loft", "310", 108), Room("Beach", "201", 60),

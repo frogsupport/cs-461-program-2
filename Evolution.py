@@ -124,3 +124,24 @@ def calculateAverageFitness(schedules):
     averageFitness = (totalFitness / scheduleCount)
 
     return averageFitness
+
+# Normalizes a population and sorts it
+def normalizedPopulation(population):
+    # Get the fitness scores in an array
+    fitnessScoreList = list()
+    for individual in population:
+        fitnessScoreList.append(individual.fitnessScore)
+
+    # Normalize the fitness scores
+    normalizedFitnessScores = special.softmax(fitnessScoreList)
+
+    # Set the normalized fitness score for the schedule
+    index = 0
+    for individual in population:
+        individual.setFitnessScore(normalizedFitnessScores[index])
+        index += 1
+
+    # Sort the population based on their fitness score
+    population.sort(reverse=True, key=sortByFitness)
+
+    return population
