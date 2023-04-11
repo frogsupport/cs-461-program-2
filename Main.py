@@ -49,9 +49,12 @@ while (((nextGenerationAverageFitness - previousGenerationAverageFitness) / prev
 
 lastGeneration = normalizedPopulation(nextGeneration)
 
+bestSchedule = lastGeneration[0]
+bestSchedule.calculateFitness()
+
 # Write the best schedule to a file
 f = open("BestSchedule.txt", "w")
-f.write(lastGeneration[0].writeSchedule())
+f.write(bestSchedule.writeSchedule())
 f.close()
     
 
